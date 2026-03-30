@@ -224,7 +224,7 @@ class Honeypot_Products {
 	 *
 	 * @return float Cheapest product price.
 	 */
-	private function get_cheapest_legitimate_price(): float {
+	public function get_cheapest_legitimate_price(): float {
 
 		global $wpdb;
 
@@ -261,7 +261,7 @@ class Honeypot_Products {
 	 *
 	 * @return array{min: float, max: float} Price range.
 	 */
-	private function calculate_price_range( float $cheapest_price ): array {
+	public function calculate_price_range( float $cheapest_price ): array {
 
 		$max = round( $cheapest_price / 2, 2 );
 		$min = DEF_HONEYPOT_MIN_PRICE;

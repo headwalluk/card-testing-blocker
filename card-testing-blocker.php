@@ -55,6 +55,13 @@ require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-threat-scorer.php
 require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-order-interceptor.php';
 require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-plugin.php';
 
+// WP-CLI commands.
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-cli.php';
+	require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'tests/class-visibility-tests.php';
+	\WP_CLI::add_command( 'ctb', 'Card_Testing_Blocker\\CLI' );
+}
+
 // Activation and deactivation.
 register_activation_hook( __FILE__, array( 'Card_Testing_Blocker\\Plugin', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Card_Testing_Blocker\\Plugin', 'deactivate' ) );
