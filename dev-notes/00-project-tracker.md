@@ -2,8 +2,8 @@
 
 **Version:** 0.1.0
 **Last Updated:** 30 March 2026
-**Current Phase:** Milestone 1 (Plugin Bootstrap & Honeypot Products)
-**Overall Progress:** 10%
+**Current Phase:** Milestone 2 (Query Filtering)
+**Overall Progress:** 15%
 
 ---
 
@@ -15,7 +15,8 @@ Card Testing Blocker is a WooCommerce plugin that detects and blocks card-testin
 
 ## Active TODO Items
 
-- [ ] Complete M1: Honeypot product CRUD and pricing logic
+- [ ] Complete M2: Query filtering
+- [ ] Complete M3: Threat scoring engine
 
 ---
 
@@ -28,16 +29,16 @@ Core plugin scaffold and the honeypot product creation system.
 - [x] Create main plugin file (`card-testing-blocker.php`) with plugin header, activation/deactivation hooks
 - [x] Create `constants.php` with all plugin constants (prefixes, default values, score weights)
 - [x] Create `includes/class-plugin.php` — main plugin class with hook registration
-- [ ] Create `includes/class-honeypot-products.php` — honeypot product CRUD
-  - [ ] Activation: query cheapest legitimate product price
-  - [ ] Activation: create honeypot products with realistic names/descriptions
-  - [ ] Dynamic pricing: range from a base price up to half the cheapest legitimate product
-  - [ ] Mark honeypot products with `_ctb_honeypot` meta
-  - [ ] Set catalog visibility to `hidden`
-  - [ ] Ensure enough products to fill a full page of results (configurable count)
-  - [ ] Deactivation: remove all honeypot products cleanly
+- [x] Create `includes/class-honeypot-products.php` — honeypot product CRUD
+  - [x] Activation: query cheapest legitimate product price
+  - [x] Activation: create honeypot products with realistic names/descriptions
+  - [x] Dynamic pricing: range from a base price up to half the cheapest legitimate product
+  - [x] Mark honeypot products with `_ctb_honeypot` meta
+  - [x] Set catalog visibility to `hidden`
+  - [x] Ensure enough products to fill a full page of results (configurable count)
+  - [x] Deactivation: remove all honeypot products cleanly
 - [x] Declare WooCommerce HPOS compatibility
-- [ ] Create `phpcs.xml` with plugin-specific configuration
+- [x] Create `phpcs.xml` with plugin-specific configuration
 
 ### M2: Query Filtering
 
@@ -119,6 +120,16 @@ Extend protection to cover REST API attack vectors.
   - [ ] Checkout speed (cart-to-checkout time below threshold)
   - [ ] Known bot user agent patterns (ancient browsers like IE7, IE9)
   - [ ] Geographic velocity (optional, if GeoIP available)
+
+### M6b: Sitemap & SEO Integrations
+
+Exclude honeypot products from sitemaps. Use `integrations/` directory for third-party SEO plugin support.
+
+- [ ] Create `integrations/` directory structure
+- [ ] Exclude honeypot products from WordPress core sitemap (`wp_sitemaps_posts_query_args`)
+- [ ] Yoast SEO integration (`wpseo_exclude_from_sitemap_by_post_ids` or `wpseo_sitemap_entry`)
+- [ ] RankMath integration
+- [ ] Auto-detect which SEO plugin is active and load the appropriate integration
 
 ### M7: Polish & Release
 
