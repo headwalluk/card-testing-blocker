@@ -52,10 +52,24 @@ Card Testing Blocker uses a **honeypot + threat scoring** approach:
 
 See the [Administrator Guide](docs/admin-guide.md) for full configuration instructions.
 
+## WP-CLI
+
+Manage honeypot products and run tests from the command line:
+
+```bash
+wp ctb status       # Show honeypot product status
+wp ctb create       # Create honeypot products
+wp ctb list         # List all honeypot products
+wp ctb test         # Run visibility test suite
+```
+
+See the [WP-CLI Reference](docs/cli-reference.md) for all commands and options.
+
 ## For Developers
 
 - [Hooks & Filters Reference](docs/hooks-reference.md) — Extend the scoring system with custom signals
 - [Architecture Overview](docs/architecture.md) — How the plugin is structured
+- [Testing Guide](docs/testing-guide.md) — Run and interpret the visibility test suite
 
 ## License
 
