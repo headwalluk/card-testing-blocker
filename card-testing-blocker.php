@@ -47,6 +47,12 @@ add_action(
 
 // Core classes.
 require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-honeypot-products.php';
+require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-query-filter.php';
+require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-signals/class-honeypot-signal.php';
+require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-signals/class-empty-search-signal.php';
+require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-signals/class-protocol-signal.php';
+require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-threat-scorer.php';
+require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-order-interceptor.php';
 require_once CARD_TESTING_BLOCKER_PLUGIN_DIR . 'includes/class-plugin.php';
 
 // Activation and deactivation.

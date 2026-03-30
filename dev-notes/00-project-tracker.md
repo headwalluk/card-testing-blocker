@@ -2,8 +2,8 @@
 
 **Version:** 0.1.0
 **Last Updated:** 30 March 2026
-**Current Phase:** Milestone 2 (Query Filtering)
-**Overall Progress:** 15%
+**Current Phase:** Milestone 5 (Admin Settings & UI)
+**Overall Progress:** 55%
 
 ---
 
@@ -15,8 +15,8 @@ Card Testing Blocker is a WooCommerce plugin that detects and blocks card-testin
 
 ## Active TODO Items
 
-- [ ] Complete M2: Query filtering
-- [ ] Complete M3: Threat scoring engine
+- [ ] Complete M5: Admin settings & UI
+- [ ] Complete M6: REST API & additional signals
 
 ---
 
@@ -44,53 +44,53 @@ Core plugin scaffold and the honeypot product creation system.
 
 Hide honeypot products from legitimate customers while ensuring bots find them.
 
-- [ ] Create `includes/class-query-filter.php`
-- [ ] Hide honeypots from WooCommerce shop/archive pages (`woocommerce_product_query`)
-- [ ] Hide honeypots from search results when search term is non-empty
-- [ ] Show honeypots in empty search queries (`?s=&post_type=product`)
-- [ ] Hide honeypots from WooCommerce product widgets
-- [ ] Hide honeypots from related products
-- [ ] Handle direct URL access to honeypot products (404 or redirect)
-- [ ] Ensure honeypots appear in WooCommerce REST API product listings
-- [ ] Verify honeypot products sort first by price (cheapest first)
+- [x] Create `includes/class-query-filter.php`
+- [x] Hide honeypots from WooCommerce shop/archive pages (`woocommerce_product_query`)
+- [x] Hide honeypots from search results when search term is non-empty
+- [x] Show honeypots in empty search queries (`?s=&post_type=product`)
+- [x] Hide honeypots from WooCommerce product widgets
+- [x] Hide honeypots from related products
+- [x] Handle direct URL access to honeypot products (404 or redirect)
+- [x] Ensure honeypots appear in WooCommerce REST API product listings
+- [ ] Verify honeypot products sort first by price (cheapest first) — needs live testing
 
 ### M3: Threat Scoring Engine
 
 Extensible scoring system for evaluating checkout attempts.
 
-- [ ] Create `includes/class-threat-scorer.php` — scoring engine
-  - [ ] Signal registration mechanism (filter-based for extensibility)
-  - [ ] Score calculation: iterate registered signals, sum scores
-  - [ ] Threshold comparison with configurable threshold
-  - [ ] Provide `ctb_threat_signals` filter for third-party signal registration
-  - [ ] Provide `ctb_threat_threshold` filter for threshold adjustment
-- [ ] Create `includes/class-signals/class-honeypot-signal.php`
-  - [ ] Check cart items for `_ctb_honeypot` meta
-  - [ ] Return configured score (default: 100)
-- [ ] Create `includes/class-signals/class-empty-search-signal.php`
-  - [ ] Hook into `pre_get_posts` to detect empty search + product post type
-  - [ ] Store IP in transient with configurable TTL (default: 1 hour)
-  - [ ] At checkout, check if current IP has a transient hit
-  - [ ] Return configured score (default: 30)
-- [ ] Create `includes/class-signals/class-protocol-signal.php`
-  - [ ] Read HTTP protocol version from server variable or custom header
-  - [ ] Compare against expected protocol (configurable, default: HTTP/2.0)
-  - [ ] Return configured score (default: 10)
-  - [ ] Degrade gracefully if protocol header not available
+- [x] Create `includes/class-threat-scorer.php` — scoring engine
+  - [x] Signal registration mechanism (filter-based for extensibility)
+  - [x] Score calculation: iterate registered signals, sum scores
+  - [x] Threshold comparison with configurable threshold
+  - [x] Provide `ctb_threat_signals` filter for third-party signal registration
+  - [x] Provide `ctb_threat_threshold` filter for threshold adjustment
+- [x] Create `includes/class-signals/class-honeypot-signal.php`
+  - [x] Check cart items for `_ctb_honeypot` meta
+  - [x] Return configured score (default: 100)
+- [x] Create `includes/class-signals/class-empty-search-signal.php`
+  - [x] Hook into `pre_get_posts` to detect empty search + product post type
+  - [x] Store IP in transient with configurable TTL (default: 1 hour)
+  - [x] At checkout, check if current IP has a transient hit
+  - [x] Return configured score (default: 30)
+- [x] Create `includes/class-signals/class-protocol-signal.php`
+  - [x] Read HTTP protocol version from server variable or custom header
+  - [x] Compare against expected protocol (configurable, default: HTTP/2.0)
+  - [x] Return configured score (default: 10)
+  - [x] Degrade gracefully if protocol header not available
 
 ### M4: Order Interception
 
 Block checkout when threat score exceeds threshold.
 
-- [ ] Create `includes/class-order-interceptor.php`
-- [ ] Hook into `woocommerce_after_checkout_validation` for classic checkout
-- [ ] Hook into `woocommerce_store_api_checkout_order_processed` for block checkout
-- [ ] Build context array from current request (cart items, IP, UA, protocol)
-- [ ] Run threat scorer, get total score and triggered signals
-- [ ] If over threshold: block with `wc_add_notice()` error / `wp_die()` as appropriate
-- [ ] Log blocked attempts (IP, UA, score breakdown, timestamp)
-- [ ] Provide `ctb_order_blocked` action for extensibility
-- [ ] Provide `ctb_order_score_calculated` action for monitoring/logging
+- [x] Create `includes/class-order-interceptor.php`
+- [x] Hook into `woocommerce_after_checkout_validation` for classic checkout
+- [x] Hook into `woocommerce_store_api_checkout_order_processed` for block checkout
+- [x] Build context array from current request (cart items, IP, UA, protocol)
+- [x] Run threat scorer, get total score and triggered signals
+- [x] If over threshold: block with `wc_add_notice()` error / `wp_die()` as appropriate
+- [x] Log blocked attempts (IP, UA, score breakdown, timestamp)
+- [x] Provide `ctb_order_blocked` action for extensibility
+- [x] Provide `ctb_order_score_calculated` action for monitoring/logging
 
 ### M5: Admin Settings & UI
 

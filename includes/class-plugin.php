@@ -80,6 +80,9 @@ class Plugin {
 		// Frontend query filtering.
 		add_action( 'pre_get_posts', array( $this, 'on_pre_get_posts' ) );
 		add_action( 'woocommerce_product_query', array( $this, 'on_product_query' ) );
+		add_filter( 'woocommerce_related_products', array( $this, 'on_related_products' ) );
+		add_filter( 'woocommerce_products_widget_query_args', array( $this, 'on_widget_products' ) );
+		add_action( 'template_redirect', array( $this, 'on_template_redirect' ) );
 
 		// Order interception.
 		add_action( 'woocommerce_after_checkout_validation', array( $this, 'on_checkout_validation' ), 10, 2 );
@@ -168,6 +171,46 @@ class Plugin {
 	public function on_product_query( \WP_Query $query ): void {
 
 		$this->get_query_filter()->filter_product_query( $query );
+	}
+
+	/**
+	 * Filter related product IDs to exclude honeypots.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $related_ids Related product IDs.
+	 *
+	 * @return array Filtered related product IDs.
+	 */
+	public function on_related_products( array $related_ids ): array {
+
+		return $this->get_query_filter()->filter_related_products( $related_ids );
+	}
+
+	/**
+	 * Filter widget product queries to exclude honeypots.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param array $query_args Widget query arguments.
+	 *
+	 * @return array Modified query arguments.
+	 */
+	public function on_widget_products( array $query_args ): array {
+
+		return $this->get_query_filter()->filter_widget_products( $query_args );
+	}
+
+	/**
+	 * Block direct URL access to honeypot products.
+	 *
+	 * @since 0.1.0
+	 *
+	 * @return void
+	 */
+	public function on_template_redirect(): void {
+
+		$this->get_query_filter()->block_direct_access();
 	}
 
 	/**
